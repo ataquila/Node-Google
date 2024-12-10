@@ -41,7 +41,7 @@ app.get('/api/hello', (req, res) => {
 app.post('/api/submit', (req, res) => {
   const { name, email } = req.body;
   // Aquí podrías guardar los datos en una base de datos
-  res.json({ message: `Usuario ${name} registrado correctamente.` });
+  res.json({ message: `Usuario ${name} registrado correctamente, con email ${email}.` });
 });
 
 //Get with parameters
