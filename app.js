@@ -17,6 +17,9 @@ import {pinoHttp, logger} from './utils/logging.js';
 
 const app = express();
 
+// Middleware para manejar JSON en el cuerpo de la solicitud
+app.use(express.json());  // Aquí agregamos express.json() para parsear JSON
+
 // Use request-based logger for log correlation
 app.use(pinoHttp);
 
