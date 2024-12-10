@@ -20,13 +20,27 @@ const app = express();
 // Use request-based logger for log correlation
 app.use(pinoHttp);
 
-// Example endpoint
-app.get('/', async (req, res) => {
+// Get
+app.get('/api/hello', (req, res) => {
   // Use basic logger without HTTP request info
   logger.info({logField: 'custom-entry', arbitraryField: 'custom-entry'}); // Example of structured logging
   // Use request-based logger with log correlation
   req.log.info('Child logger with trace Id.'); // https://cloud.google.com/run/docs/logging#correlate-logs
   res.send('Hola te estoy viendo!');
+});
+
+//Submit
+app.post('/api/submit', (req, res) => {
+  const { name, email } = req.body;
+  // Aquí podrías guardar los datos en una base de datos
+  res.json({ message: `Usuario ${name} registrado correctamente.` });
+});
+
+//Get with parameters
+app.get('/api/users', (req, res) => {
+  const { name, age } = req.query;
+  // Aquí podrías realizar una búsqueda de usuarios en base a los parámetros
+  res.json({ message: `Buscando usuarios con nombre ${name} y edad ${age}` });
 });
 
 export default app;
